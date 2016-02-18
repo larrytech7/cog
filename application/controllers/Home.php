@@ -12,7 +12,12 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->helper('form');
-        $this->load->model(array('clientmodel','user', 'information','homemodel'));
+        $this->load->model(array('clientmodel',
+        'user',
+         'information',
+         'homemodel',
+         'prayermodel',
+         'eventmodel'));
      //   $this->output->enable_profiler(true);
         $login = $this->session->userdata('user');
         
@@ -42,11 +47,22 @@ class Home extends CI_Controller {
         $this->load->view('authentic/content',$this->data);
         $this->load->view('authentic/footer');   
     }
-    //show notification page
+    //show prayer requests page
     public function notifications(){
+        $prequests = $this->prayermodel->getprayer_requests();
+        $this->data['prayerrequests'] = $prequests;
         $this->load->view('authentic/header', $this->data);
         $this->load->view('authentic/notifications',$this->data);
         $this->load->view('authentic/footer');
+    }
+    public function deleteprayer_request($id){
+        $deleted = $this->prayermodel->deleteprayer_request($id);
+        if($deleted){
+            $this->session->set_flashdata('success', 'Deleted Successfully');
+        }else{
+            $this->session->set_flashdata('error', 'Delete Failed. Please try again');            
+        }
+        header('Location: '.site_url('home/notifications'));
     }
     //delete a given sermon
     public function delete_sermon($pid){
@@ -133,7 +149,7 @@ class Home extends CI_Controller {
             if($update)
                 $this->session->set_flashdata('success','Message updated succcessfully.');
             else
-                $this->session->set_flashdata('error','Error occuered while trying to update message');                
+                $this->session->set_flashdata('error','Error ocurred while trying to update message');                
             
             redirect(site_url('home'), 'location');
             
@@ -143,6 +159,46 @@ class Home extends CI_Controller {
             $this->load->view('authentic/footer');
         }
     }
+    
+    public function events(){
+           
+        $this->form_validation->set_rules(
+        'message', 'Message',
+        'trim|required|min_length[4]',
+        array(
+                'required' => 'You have not provided %s.',
+                'min_length' => 'Message must be atleast 4 characters long'
+            )
+        );
+        
+        if($this->form_validation->run() == true){
+            $event = array(
+                        'date'     =>$this->input->post('date', true),
+                        'message'   =>$this->input->post('message', true)
+                        );
+            $status = $this->eventmodel->add('events', $event);
+            if($status)
+                $this->session->set_flashdata('success','Event created succcessfully.');
+            else
+                $this->session->set_flashdata('error','Error ocurred while trying to update event. Please try again');                
+            
+            redirect(site_url('home'), 'location');
+            
+        }else{
+            $this->load->view('authentic/header', $this->data);
+            $this->load->view('authentic/events',$this->data);
+            $this->load->view('authentic/footer');
+        }
+    }
+    
+    public function announce(){
+        
+    }
+    
+    public function counsel(){
+        
+    }
+    
     //create and upload a new sermon message
     public function createmessage(){
         $this->form_validation->set_rules(

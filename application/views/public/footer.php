@@ -126,6 +126,12 @@
             $errs = strip_tags(validation_errors(),'br');
             if(!empty($errs))
                 echo "$('#signup').openModal();";
+                
+            if(strlen($this->session->flashdata('success')) > 0)
+                echo 'Materialize.toast("'.$this->session->flashdata('success').'", 6000, "green-text")';
+            
+            if(strlen($this->session->flashdata('error')) > 0)
+                echo 'Materialize.toast("'.$this->session->flashdata('error').'", 6000, "red-text")';
   ?>
 
   </script>

@@ -15,10 +15,10 @@
         <h2>Meet Our Pastors Who Share God's Love</h2>
       </div>
       <div class="grid_4">
-        <img src="<?php echo base_url('assets/images/page1_img1.jpg'); ?>" alt="" />
+        <img src="<?php echo base_url('assets/images/prophet.jpg'); ?>" alt="propher" height="120" width="120" />
         <div class="extra_wrapper">
-          <div class="block-1_title"><a href="#">Mark Johnson</a></div>
-          Lorem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, sit... 
+          <div class="block-1_title"><a href="#">T Collins</a></div>
+            Main Church pastor. Carries the vision from the most High.
         </div>
       </div>
       <div class="grid_4">

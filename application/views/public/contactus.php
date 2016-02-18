@@ -25,6 +25,7 @@
       <br />
           <div class="contact-form-loader"></div>
           <div class="grid_6">
+          <?php echo validation_errors('<p class="red-text">','</p>'); ?>
             <?php echo form_open('welcome/contacts', array('class'=>'col s12')); ?>
                 <div class="input-field col s12">
                   <i class="material-icons prefix">account_circle</i>
@@ -45,7 +46,7 @@
            <div class="grid_6">
                 <div class="input-field col s12 m12">
                     <i class="material-icons prefix">message</i>
-                    <textarea class="materialize-textarea" id="message" name="message" cols="50" rows="20" required></textarea>
+                    <textarea class="materialize-textarea" id="message" name="message" cols="50" rows="50" required></textarea>
                     <label for="message">Enter your message</label>
                 </div>
             <div>

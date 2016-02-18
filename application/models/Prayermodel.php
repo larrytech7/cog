@@ -23,7 +23,14 @@ class Prayermodel extends CI_Model{
     public function getrequest_byid($id){
         return $this->db->from($this->prayer_table)
                     ->where('id', $id)
+                    ->order_by('dateadd', 'DESC')
                     ->get()
+                    ->result_array();
+    }
+    public function getprayer_requests(){
+        return $this->db
+                    ->order_by('dateadd', 'DESC')
+                    ->get($this->prayer_table)
                     ->result_array();
     }
     

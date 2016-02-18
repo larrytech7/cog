@@ -15,7 +15,8 @@ class Welcome extends CI_Controller {
                              'clientmodel',
                              'prayermodel',
                              'testimony',
-                             'homemodel'));
+                             'homemodel',
+                             'eventmodel'));
         //$this->output->enable_profiler(true);
         
         $config['protocol'] = 'smtp';
@@ -26,11 +27,11 @@ class Welcome extends CI_Controller {
     	$config['smtp_user'] = 'larryakah@iceteck.com';
     	$config['smtp_pass'] = 'creationfox7';
     	$config['smtp_crypto'] = 'ssl';
-//    	$config['mailtype'] = 'html';
+    	$config['mailtype'] = 'html';
     	$this->email->initialize($config);
-        $this->email->from('service@iceteck.com', 'City Of Grace');
+      //  $this->email->from('service@iceteck.com', 'City Of Grace');
         $this->email->to('larryakah@gmail.com');
-        $this->email->subject('City of Grace Service');
+      //  $this->email->subject('City of Grace Contact');
     }
 	/**
 	 * Index Page for this controller.
@@ -39,6 +40,8 @@ class Welcome extends CI_Controller {
 	public function index($extra = array()){
 	   $this->data['current'] = 'home';
        $this->data['sermons'] = $this->homemodel->get_all('sermons');
+       $this->data['events'] = $this->eventmodel->get_all('events');
+       
 	   if(isset($extra['message'])){
 	       $this->data['subscriptioninfo'] = $extra['message'];
 	   }
@@ -125,8 +128,30 @@ class Welcome extends CI_Controller {
     }    
     //process contact message
     public function contacts(){
+        $this->form_validation->set_rules(
+        'phone', 'phone',
+        'trim|required|min_length[9]',
+        array(
+                'required' => 'You have not provided %s.',
+                'min_length' => 'Phone number must be atleast 9 digits long'
+            )
+        );
         if($this->form_validation->run()){
-           return; 
+            //send email
+            $name = $this->input->post('name');
+            $number = $this->input->post('phone');
+            $uemail = $this->input->post('email');
+            $message =  $this->input->post('message');
+            
+            $this->email->from($uemail, $name);
+            $this->email->subject('Contact from COG website');
+            $this->email->message('<h1>User Inquiry from website</h1><br/>'.$message.'');
+            $sent = $this->email->send(false);
+            if($sent){
+                $this->session->set_flashdata('success', 'Message was sent, we will get back to you soon');
+            }else{
+              $this->session->set_flashdata('error','Unable to deliver your message, Please try again');
+            }
         }
         $this->data['current'] = 'contact';
 		$this->load->view('public/header', $this->data);

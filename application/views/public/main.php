@@ -2,7 +2,7 @@
   <div id="camera_wrap" class="">
     <div data-src="<?php echo base_url('assets/images/slide.jpg'); ?>"></div>
     <div data-src="<?php echo base_url('assets/images/slide1.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide2.jpg'); ?>"></div>  
+    <div data-src="<?php echo base_url('assets/images/prophetmain.jpg'); ?>"></div>  
   </div>  
 </section> 
 <!--=====================
@@ -107,52 +107,22 @@ Requests</a>
     <div class="container_12">
       <div class="grid_12">
         <div id="owl">
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">July 25</div>
-              <p>The detailed description of the <a href="http://blog.templatemonster.com/free-website-templates/" rel="nofollow" class="color2">freebie</a> is published on the blog. <br><br>
-              Find <a href="http://www.templatemonster.com/properties/topic/society-people/" rel="nofollow" class="color2">society &amp; people themes</a> in the same name category at TemplateMonster.com</p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">August 17</div>
-              
-              <p>or sit tetur dipiscing elit. In mollis erat mattis neque facilisis</p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">September 10</div>
-              <p>J mattis neque facilisise </p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">July 25</div>
-              <p>Thblished on the blog. <br><br>
-              Find <a href="http://www.templatemonster.com/properties/topic/society-people/" rel="nofollow" class="color2">society &amp; people themes</a> in the same name category at TemplateMonster.com</p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">August 17</div>
-              
-              <p>Hog elit. In mollis erat mattis neque facilisis</p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="banner">
-              <div class="banner_title">September 10</div>
-              <p>Jorem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, sit wertolio mero dasererat rutrumrem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisise </p>
-              <a href="#" class="owl_link">Read More</a>
-            </div>
-          </div>
+            <?php
+                if(isset($events)){
+                 foreach($events as $ev){
+                    $datetitle = $ev['date'];
+                    $content = $ev['message'];
+                    echo 
+                    '<div class="item">
+                        <div class="banner">
+                            <div class="banner_title">'.$datetitle.'</div>
+                            <p>'.$content.'</p>
+                            <a href="#" class="owl_link">Read More</a>
+                        </div>
+                    </div>';
+                 }   
+                }
+            ?>
         </div>
       </div>
       <div class="clear"></div>
