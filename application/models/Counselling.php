@@ -27,5 +27,11 @@ class Counselling extends CI_Model{
                     ->result_array();
     }
     
+    public function getallrequests(){
+        return $this->db->from($this->counsel_table)
+                    ->order_by('dateadd', 'DESC')
+                    ->get()
+                    ->result_array();
+    }
 }  
 ?>

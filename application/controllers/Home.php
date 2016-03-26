@@ -17,6 +17,7 @@ class Home extends CI_Controller {
          'information',
          'homemodel',
          'prayermodel',
+         'counselling',
          'eventmodel'));
      //   $this->output->enable_profiler(true);
         $login = $this->session->userdata('user');
@@ -55,6 +56,8 @@ class Home extends CI_Controller {
         $this->load->view('authentic/notifications',$this->data);
         $this->load->view('authentic/footer');
     }
+    
+    //delete a prayer request entry
     public function deleteprayer_request($id){
         $deleted = $this->prayermodel->deleteprayer_request($id);
         if($deleted){
@@ -64,6 +67,20 @@ class Home extends CI_Controller {
         }
         header('Location: '.site_url('home/notifications'));
     }
+    
+    //TODO::// delete a counselling request
+    public function deletecounsel_request($id){
+        $st  = $this->counselling->deletecounsel_request($id);
+        if($st){
+            $this->session->set_flashdata('success', 
+                'Request successfully Removed.');
+        }else{
+             $this->session->set_flashdata('error',
+            'Error, the counsel request was not deleted. Try again.');
+        }
+        redirect(site_url('home'), 'location');
+    }
+    
     //delete a given sermon
     public function delete_sermon($pid){
         $deleted = $this->homemodel->delete('sermons',$pid);
@@ -191,12 +208,19 @@ class Home extends CI_Controller {
         }
     }
     
+    //TODO:: //publish or read announcements
     public function announce(){
         
     }
     
     public function counsel(){
+        //retrieve requests from the db
+        $requests = $this->counselling->getallrequests();
+        $this->data['counselrequests'] =  $requests;
         
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/counselling', $this->data);
+        $this->load->view('authentic/footer');
     }
     
     //create and upload a new sermon message

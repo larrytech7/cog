@@ -14,7 +14,7 @@
               
         </div>
         <div class="col s8 m8 l8">
-                <h3><i class="material-icons prefix small">notifications</i> Prayer requests. </h3>
+                <h3><i class="material-icons prefix small">notifications</i> Counselling requests. </h3>
                 <div class="card-panel teal darken-3 responsive">
                     <div class="row ">
                         <div class="col s12">
@@ -26,9 +26,9 @@
                         <div id="test1" class="col s12">Read content</div>
                         <div id="test2" class="col s12">
                                             <?php
-                                            if(isset($prayerrequests)):
+                                            if(isset($counselrequests)):
                                             echo '<ul class="collection">';
-                                             foreach($prayerrequests as $request):
+                                             foreach($counselrequests as $request):
                                                 $statcolor = 'teal';
                                                 $statfigure = 'check_circle';
                                                  
@@ -39,8 +39,8 @@
                                                         '.$request['message'].'
                                                         </p>';
                                                 echo '<p class="secondary-content">
-                                                        <a href="'.site_url('home/reply_prequest/'.$request['id']).'"  class="tooltipped" data-position="bottom" data-delay="30" data-tooltip="Reply this request"><i class="material-icons">reply_all</i></a>
-                                                        <a href="'.site_url('home/deleteprayer_request/'.$request['id']).'" onclick="deletemsg(this)" class="tooltipped" data-position="top" data-delay="30" data-tooltip="Delete Request"><i class="material-icons red-text lighten-3">delete</i></a>
+                                                        <a href="'.site_url('home/reply_crequest/'.$request['id']).'"  class="tooltipped" data-position="bottom" data-delay="30" data-tooltip="Reply this request"><i class="material-icons">reply_all</i></a>
+                                                        <a href="'.site_url('home/deletecounsel_request/'.$request['id']).'" onclick="deletemsg(this)" class="tooltipped" data-position="top" data-delay="30" data-tooltip="Delete Request"><i class="material-icons red-text lighten-3">delete</i></a>
                                                     </p>
                                                     </li>';
                                             ?>

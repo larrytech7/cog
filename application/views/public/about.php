@@ -24,16 +24,16 @@
       <div class="grid_4">
         <img src="<?php echo base_url('assets/images/page1_img2.jpg'); ?>" alt=""/>
         <div class="extra_wrapper">
-          <div class="block-1_title"><a href="#">Sam Rock</a></div>
-          Korem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, sito... 
+          <div class="block-1_title"><a href="#">Pastor 2</a></div>
+          pastor 2 
         </div>
 
       </div>
       <div class="grid_4">
         <img src="<?php echo base_url('assets/images/page1_img3.jpg'); ?>" alt=""/>
         <div class="extra_wrapper">
-          <div class="block-1_title"><a href="#">Patrick Pool</a></div>
-          Forem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisu... 
+          <div class="block-1_title"><a href="#">Pastor 3</a></div>
+           pastor 3
         </div>
       </div>
       <div class="clear"></div>

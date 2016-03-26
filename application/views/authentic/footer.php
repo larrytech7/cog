@@ -68,7 +68,7 @@
     <script>
         function deletemsg(me){
         event.preventDefault();
-        if(confirm('Are you sure you want to delete this message?')){
+        if(confirm('Are you sure you want to delete this?')){
             window.location = $(me).attr('href');
             //alert($(me).attr('href'));   
         }

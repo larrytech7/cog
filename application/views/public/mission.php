@@ -5,7 +5,7 @@
   <div class="container_12">
     <div class="grid_12">
       <h2>Global Mission</h2>
-      <img src="<?php echo base_url('assets/images/page3_img.jpg')?>" alt="" class="img_inner fleft">
+      <img src="<?php echo base_url('assets/images/page3_img.jpg')?>" alt="" class="img_inner fleft"/>
       <div class="extra_wrapper">
         <div class="text1 tx__2"><span>Healing and delivering God's people.</span></div>
         <p>Pastors, prophets are sent to utter the deep things of God. Our mission therefore is to liberate
@@ -22,17 +22,17 @@
       <ul class="list-1 lst__1">
         <li class="grid_4">
           <div class="count">1</div> <br/>
-          Korem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing elits.
+          First outreach
           <br/>
         </li>
         <li class="grid_4">
           <div class="count">2</div> <br/>
-          Horem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing eler.
+          Second outreach.
           <br/>
         </li>
         <li class="grid_4">
           <div class="count">3</div> <br/>
-          Aorem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing elitas.
+          Third outreach.
           <br/>
         </li>
         <li class="clear"></li>
@@ -44,30 +44,30 @@
       <h3>International Mission</h3>
     </div>
     <div class="grid_4">
-      <img src="<?php echo base_url('assets/images/page3_img1.jpg')?>" alt="" class="img_inner offset__1">
+      <img src="<?php echo base_url('assets/images/page3_img1.jpg')?>" alt="" class="img_inner offset__1"/>
       <div class="text1"><a href="#">Vestibullutpat</a></div>
-      Morem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing eli.
+      mission 1.
     </div>
     <div class="grid_4">
-      <img src="<?php echo base_url('assets/images/page3_img2.jpg')?>" alt="" class="img_inner offset__1">
+      <img src="<?php echo base_url('assets/images/page3_img2.jpg')?>" alt="" class="img_inner offset__1" />
       <div class="text1"><a href="#">Mestiohnson</a></div>
-      Sorem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing elitas.
+      mission 2.
     </div>
     <div class="grid_4">
-      <img src="<?php echo base_url('assets/images/page3_img3.jpg')?>" alt="" class="img_inner offset__1">
+      <img src="<?php echo base_url('assets/images/page3_img3.jpg')?>" alt="" class="img_inner offset__1" />
       <div class="text1"><a href="#">Stibulume</a></div>
-      Lorem ipsum dolor sit tetur dipiscing elit. In mollis erat mattis neque facilisis, situltries wertolio dasererat rutrum. Lorem ipsum dolor sit tetur dipiscing elit.
+      mission 3.
     </div>
     <div class="clear"></div>
   </div>
   <article class="block-1 offset__2">
     <div class="container_12">
       <div class="grid_12">
-        <h2>Change the World by Supporting Our <br> Mission Today</h2>
+        <h2>Change the World by Supporting Our <br/> Mission Today</h2>
       </div>
       <ul class="list-1 lst__1">
         <li class="grid_4">
-          <div class="count">1</div> <div class="text1"><a href="#!">Go back to HOME</a></div>
+          <div class="count">1</div> <div class="text1"><a href="<?php echo site_url('home'); ?>">Go back to HOME</a></div>
         </li>
         <li class="grid_4">
           <div class="count">2</div> <div class="text1"><a href="#!">Find the Support section</a></div>
