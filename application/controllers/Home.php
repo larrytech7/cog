@@ -10,7 +10,7 @@ class Home extends CI_Controller {
     
     public function __construct(){
         parent::__construct();
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation','email'));
         $this->load->helper('form');
         $this->load->model(array('clientmodel',
         'user',
@@ -18,6 +18,7 @@ class Home extends CI_Controller {
          'homemodel',
          'prayermodel',
          'counselling',
+         'testimony',
          'eventmodel'));
      //   $this->output->enable_profiler(true);
         $login = $this->session->userdata('user');
@@ -28,7 +29,6 @@ class Home extends CI_Controller {
             $this->muser = $this->clientmodel->getuser_byid($login);
             $this->data['user'] = $this->muser[0];
         }
-        
     }
     
     public function index(){
@@ -49,14 +49,33 @@ class Home extends CI_Controller {
         $this->load->view('authentic/footer');   
     }
     //show prayer requests page
-    public function notifications(){
+    public function notifications($start_at = 0){
         $prequests = $this->prayermodel->getprayer_requests();
         $this->data['prayerrequests'] = $prequests;
         $this->load->view('authentic/header', $this->data);
         $this->load->view('authentic/notifications',$this->data);
         $this->load->view('authentic/footer');
     }
-    
+    //list testimonies to publish to site or remove as invalid
+    public function testimonies(){
+        //list of testimonies (pending/confirmed))
+        $this->data['testimonies'] = $this->testimony->list_testimonies();
+        
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/testimonies', $this->data);
+        $this->load->view('authentic/footer');
+    }
+    //action on a testimony
+    public function actiontestimony($action = 'confirm', $id){
+        if($action == 'refute'){
+            $this->testimony->deletetestimony_request($id);
+        }else{
+            $this->testimony->updateTestimony($id);
+        }
+        $this->session->set_flashdata('message', 'Action confirmed');
+        redirect(site_url('home/testimonies'), 'location');
+        
+    }
     //delete a prayer request entry
     public function deleteprayer_request($id){
         $deleted = $this->prayermodel->deleteprayer_request($id);
@@ -78,7 +97,7 @@ class Home extends CI_Controller {
              $this->session->set_flashdata('error',
             'Error, the counsel request was not deleted. Try again.');
         }
-        redirect(site_url('home'), 'location');
+        redirect(site_url('home/counsel'), 'location');
     }
     
     //delete a given sermon
@@ -191,6 +210,7 @@ class Home extends CI_Controller {
         if($this->form_validation->run() == true){
             $event = array(
                         'date'     =>$this->input->post('date', true),
+                        'time'      => $this->input->post('time'),
                         'message'   =>$this->input->post('message', true)
                         );
             $status = $this->eventmodel->add('events', $event);
@@ -210,7 +230,15 @@ class Home extends CI_Controller {
     
     //TODO:: //publish or read announcements
     public function announce(){
+        $this->events();
+    }
+    //list members in a table
+    public function members(){
+        $this->data['users'] = $this->user->list_users();
         
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/members',$this->data);
+        $this->load->view('authentic/footer');
     }
     
     public function counsel(){
@@ -222,7 +250,16 @@ class Home extends CI_Controller {
         $this->load->view('authentic/counselling', $this->data);
         $this->load->view('authentic/footer');
     }
-    
+    //reply to counselling requests
+    public function reply_crequest($id){
+        $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+        $this->counsel();
+    }
+    //reply to prayer requests
+    public function reply_prequest($id){
+        $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+        $this->notifications();
+    }
     //create and upload a new sermon message
     public function createmessage(){
         $this->form_validation->set_rules(

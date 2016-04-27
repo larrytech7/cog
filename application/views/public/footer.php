@@ -72,6 +72,7 @@
     <!-- music player imports end -->
     <!--[if (gt IE 9)|!(IE)]><!-->
     <script src="<?php echo base_url('assets/js/jquery.mobile.customized.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.dataTables.js'); ?>"></script>
     <!--<![endif]-->
     <script>
      $(window).load(function(){
@@ -110,6 +111,7 @@
             
         });
         $('.materialboxed').materialbox();
+        $('#ttable').dataTable();
     });
     </script>
     <script type="text/javascript">
@@ -143,19 +145,6 @@
                 		oga:'',
                         rating:5,
                         title:'Above All Powers',
-                        buy:'',
-                        price:'',
-                        duration:'4:45',
-                        artist:'Unknown',
-                        cover:'<?php echo base_url('assets/images/page3_img1.jpg'); ?>'
-                	},
-                    {
-                		mp3:'<?php echo base_url("assets/audio/aboveallpowers.mp3"); ?>',
-                		oga:'',
-                        rating:5,
-                        title:'Above All Powers',
-                        buy:'',
-                        price:'',
                         duration:'4:45',
                         artist:'Unknown',
                         cover:'<?php echo base_url('assets/images/page3_img1.jpg'); ?>'

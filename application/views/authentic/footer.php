@@ -52,6 +52,8 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="<?php echo base_url('assets/materialize/js/materialize.js'); ?>"></script>
   <script src="<?php echo base_url('assets/materialize/js/init.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/jquery.dataTables.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/picker.time.js'); ?>"></script>
     <script>
     
     $(document).ready(function(){
@@ -62,6 +64,16 @@
             selectYears: 15, // Creates a dropdown of 15 years to control year
             startingDate: new Date()
           });
+        $('.timepicker').pickatime({
+          formatLabel: function(time) {
+            var hours = ( time.pick - this.get('now').pick ) / 60,
+              label = hours < 0 ? ' !hours to now' : hours > 0 ? ' !hours from now' : 'now'
+            return  'h:i a <sm!all>' + ( hours ? Math.abs(hours) : '' ) + label +'</sm!all>'
+          }
+        });
+        //pagination via datatables
+        $('#usertable').dataTable();
+        $('#ttable').dataTable();
     });
     
     </script>

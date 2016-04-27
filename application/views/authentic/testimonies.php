@@ -25,34 +25,40 @@
               </ul>
         </div>
         <div class="col s8 m8 l8">
-                <h3><i class="material-icons prefix">announcement</i> Sermons. </h3>
+                <h3><i class="material-icons prefix">announcement</i> Testimonies. </h3>
                 <div class="card-panel teal darken-3 responsive">
                     <div class="row ">
-                            <ul class="collection">
+                        <table id="ttable">
+                            <thead>
+                                <tr>
+                                    <th>Phone</th>
+                                    <th>Name</th>
+                                    <th>Message</th>
+                                    <th>status</th>
+                                    <th>Registered</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
                                 <?php
-                                if(isset($mymessages)):
-                                 foreach($mymessages as $mymessage):
-                                    $statcolor = 'teal';
-                                    $statfigure = 'check_circle';
-                                     
-                                    echo '<li class="collection-item avatar">
-                                            <i class="material-icons circle '.$statcolor.'">'.$statfigure.'</i>
-                                            <span class="title">Date Published => '.$mymessage['date'].' </span>
-                                            <p><b>'.$mymessage['title'].'</b> <br/>
-                                            '.$mymessage['message'].'
-                                            </p>';
-                                    echo '<p class="secondary-content">
-                                            <a href="'.site_url('home/edit/'.$mymessage['id']).'"  class="tooltipped" data-position="bottom" data-delay="30" data-tooltip="Edit this message"><i class="material-icons">create</i></a>
-                                            <a href="'.site_url('home/delete_sermon/'.$mymessage['id']).'" onclick="deletemsg(this)" class="tooltipped" data-position="top" data-delay="30" data-tooltip="Delete "><i class="material-icons red-text lighten-3">delete</i></a>
-                                        </p>
-                                        </li>';
+                                if(isset($testimonies)):
+                                 foreach($testimonies as $testimony):
+                                    $icon = $testimony['status'] == 0?'<span><i class="material-icons red-text">error</i></span>':'<span><i class="material-icons blue-text">verified_user</i></span>';
+                                    echo '<tr>
+                                        <td>'.$testimony['phone'].'</td>
+                                        <td>'.$testimony['name'].'</td>
+                                        <td>'.$testimony['message'].'</td>
+                                        <td>'.$icon.'</td>
+                                        <td>'.$testimony['dateadd'].'</td>
+                                        <td><a href="'.site_url('home/actiontestimony/confirm/'.$testimony['id']).'" title="confirm and publish testimony"><i class="material-icons blue-text">done_all</i></a>
+                                        <a href="'.site_url('home/actiontestimony/refute/'.$testimony['id']).'" title="Refuse and delete testimony"><i class="material-icons red-text">delete_forever</i></a>
+                                        </td>
+                                    </tr>';
                                 ?>
                                 <?php
                                     endforeach;
                                     endif;
                                 ?>
-                                
-                              </ul>
+                        </table>   
                     </div>
                 </div>
         </div>

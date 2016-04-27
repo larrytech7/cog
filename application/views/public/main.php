@@ -117,7 +117,6 @@ Requests</a>
                         <div class="banner">
                             <div class="banner_title">'.$datetitle.'</div>
                             <p>'.$content.'</p>
-                            <a href="#" class="owl_link">Read More</a>
                         </div>
                     </div>';
                  }   

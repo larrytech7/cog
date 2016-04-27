@@ -19,10 +19,26 @@ class Testimony extends CI_Model{
         return $this->db->where('id', $id)
                     ->delete($this->testimony_table);
     }
-    
-    public function getrequest_byid($id){
+    /**
+     * Get testimonies having a status of published(1) from the database
+     * 
+     */  
+    public function gettestimonies_bystatus($status){
         return $this->db->from($this->testimony_table)
+                    ->where('status', $status)
+                    ->get()
+                    ->result_array();
+    }
+    
+    public function updateTestimony($id){
+        return $this->db
+                    ->set('status', 1)
                     ->where('id', $id)
+                    ->update($this->testimony_table);
+    }
+    
+    public function list_testimonies(){
+        return $this->db->from($this->testimony_table)
                     ->get()
                     ->result_array();
     }

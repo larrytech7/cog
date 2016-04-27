@@ -10,6 +10,8 @@
                 <li class="collection-item"><div>General announcements<a href="<?php echo site_url('home/announce'); ?>" class="secondary-content"><i class="material-icons">announcement</i></a></div></li>
                 <li class="collection-item"><div>Events<a href="<?php echo site_url('home/events'); ?>" class="secondary-content"><i class="material-icons">event</i></a></div></li>
                 <li class="collection-item"><div>Counselling<a href="<?php echo site_url('home/counsel'); ?>" class="secondary-content"><i class="material-icons">wc</i></a></div></li>
+                <li class="collection-item"><div>Users<a href="<?php echo site_url('home/members'); ?>" class="secondary-content"><i class="material-icons">supervisor_account</i></a></div></li>
+                <li class="collection-item"><div>Testimonies<a href="<?php echo site_url('home/testimonies'); ?>" class="secondary-content"><i class="material-icons">record_voice_over</i></a></div></li>
               </ul>
         </div>
         <div class="col s8 m8 l8">
@@ -23,17 +25,25 @@
                               <div class="row">
                                 <?php echo form_open('home/events', array('class'=>'col s12')); ?>
                                   <div class="row">
-                                    <div class="input-field col s12">
-                                      <i class="material-icons prefix">date</i>
+                                    <div class="input-field col s6">
+                                      <i class="material-icons prefix">today</i>
                                       <input id="icon_prefix" type="date" class="datepicker" name="date" required="required"/>
-                                      <label for="icon_prefix">When is the event?</label>
+                                      <label for="icon_prefix">When is the event (Date)?</label>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <div class="input-field col s6">
+                                      <i class="material-icons prefix">today</i>
+                                      <input id="icon_time" type="time" class="timepicker" name="time" required="required"/>
+                                      <label for="icon_time">Time</label>
                                     </div>
                                   </div>
                                 
                                   <div class="row">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">edit</i>
-                                        <textarea id="input_message" cols="100" rows="10" class="materialize-textarea" name="message" required></textarea>
+                                        <textarea id="input_message" cols="70" rows="10" class="materialize-textarea" name="message" required></textarea>
                                         <label for="input_message">Event Details</label>
                                     </div>
                                   </div>

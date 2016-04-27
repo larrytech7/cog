@@ -14,6 +14,11 @@ class User extends CI_Model{
     
     public function create_user($user){
             return $this->db->insert($this->usertable, $user); 
+    }
+    public function list_users(){
+        return $this->db
+                ->order_by('dateadd', 'ASC')
+                ->get($this->usertable)->result_array();
     }   
     public function delete_user($id){
         return $this->db->where('id', $id)

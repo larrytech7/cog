@@ -25,34 +25,35 @@
               </ul>
         </div>
         <div class="col s8 m8 l8">
-                <h3><i class="material-icons prefix">announcement</i> Sermons. </h3>
+                <h3><i class="material-icons prefix">announcement</i> Registered Members. </h3>
                 <div class="card-panel teal darken-3 responsive">
                     <div class="row ">
-                            <ul class="collection">
+                        <table id="usertable">
+                            <thead>
+                                <tr>
+                                    <th>Phone</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Country</th>
+                                    <th>Registered</th>
+                                </tr>
+                            </thead>
                                 <?php
-                                if(isset($mymessages)):
-                                 foreach($mymessages as $mymessage):
-                                    $statcolor = 'teal';
-                                    $statfigure = 'check_circle';
-                                     
-                                    echo '<li class="collection-item avatar">
-                                            <i class="material-icons circle '.$statcolor.'">'.$statfigure.'</i>
-                                            <span class="title">Date Published => '.$mymessage['date'].' </span>
-                                            <p><b>'.$mymessage['title'].'</b> <br/>
-                                            '.$mymessage['message'].'
-                                            </p>';
-                                    echo '<p class="secondary-content">
-                                            <a href="'.site_url('home/edit/'.$mymessage['id']).'"  class="tooltipped" data-position="bottom" data-delay="30" data-tooltip="Edit this message"><i class="material-icons">create</i></a>
-                                            <a href="'.site_url('home/delete_sermon/'.$mymessage['id']).'" onclick="deletemsg(this)" class="tooltipped" data-position="top" data-delay="30" data-tooltip="Delete "><i class="material-icons red-text lighten-3">delete</i></a>
-                                        </p>
-                                        </li>';
+                                if(isset($users)):
+                                 foreach($users as $user):
+                                    echo '<tr>
+                                        <td>'.$user['phone'].'</td>
+                                        <td>'.$user['name'].'</td>
+                                        <td>'.$user['email'].'</td>
+                                        <td>'.$user['country'].'</td>
+                                        <td>'.$user['dateadd'].'</td>
+                                    </tr>';
                                 ?>
                                 <?php
                                     endforeach;
                                     endif;
                                 ?>
-                                
-                              </ul>
+                        </table>   
                     </div>
                 </div>
         </div>

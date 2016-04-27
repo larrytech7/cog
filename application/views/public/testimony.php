@@ -12,10 +12,35 @@
   <div class="container_12">
     <div class="grid_12">
       <div class="banner">
-        <a href="#!" class="banner_title">Ministry<br>
+        <a href="#!" class="banner_title">Ministry<br />
 Testimonies</a>
-        <div class="maxheight"><img src="<?php echo base_url('assets/images/b_icon3.png'); ?>" alt=""></div>
-        <div>Testimony content goes here.</div>
+        <div class="maxheight" style="padding: 10px;">
+            <table id="ttable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Testimony</th>
+                                    <th>Media</th>
+                                    <th>Verified</th>
+                                </tr>
+                            </thead>
+                                <?php
+                                if(isset($testimonies)):
+                                 foreach($testimonies as $testimony):
+                                    $icon = '<span><i class="material-icons blue-text">verified_user</i></span>';
+                                    echo '<tr>
+                                        <td>'.$testimony['name'].'</td>
+                                        <td>'.$testimony['message'].'</td>
+                                        <td>'.$testimony['media'].'<img src="'.base_url('assets/images/b_icon3.png').'" alt="" /></td>
+                                        <td>'.$icon.'</td>
+                                    </tr>';
+                                ?>
+                                <?php
+                                    endforeach;
+                                    endif;
+                                ?>
+                        </table>
+        </div>
       </div>
     </div>
     

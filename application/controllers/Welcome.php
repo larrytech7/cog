@@ -31,6 +31,7 @@ class Welcome extends CI_Controller {
     	$this->email->initialize($config);
       //  $this->email->from('service@iceteck.com', 'City Of Grace');
         $this->email->to('larryakah@gmail.com');
+        $this->email->cc('lakah@giftedmom.org,icep603@gmail.com,milefourwomen@yahoo.com');
       //  $this->email->subject('City of Grace Contact');
     }
 	/**
@@ -59,8 +60,13 @@ class Welcome extends CI_Controller {
                     'dateadd' => date("Y-m-d H:i:s")
         );
         if($this->user->create_user($user)){
-            $this->data['message'] = 'You have been successfully registered. Welcome to the community of saints';
-            
+            $this->data['message'] = 'You have successfully registered. Welcome to the community of saints';
+             //send email after saving data
+            $this->email->from("service@iceteck.com", "City Of Grace");
+            $this->email->subject('New Member');
+            $this->email->message('<h1>A new member just registered via the website</h1><br/> We have a new member. Send a welcome message by viewing here.
+            <a href="http://cogministries.iceteck.com/index.php/home/members">NEW MEMBER</a>');
+            $sent = $this->email->send(false);
         }else{
             $this->data['error']  = 'A member with the same credentials exists. Try again';
         }
@@ -75,8 +81,15 @@ class Welcome extends CI_Controller {
                     'message' => $this->input->post('message'),
                     'dateadd' => date("Y-m-d H:i:s")
         );
-        if($this->counselling->savecounsel_request($request))
-            $this->data['message']= 'Sent Successfully. We will get to you soon. God bless';
+        if($this->counselling->savecounsel_request($request)){
+            $this->data['message']= 'Sent Successfully. We will get to you soon. God bless You';
+            //send email after saving data
+            $this->email->from("service@iceteck.com", "City Of Grace"); 
+            $this->email->subject('Counselling Request from COG website');
+            $this->email->message('<h1>User Sent a counselling request via the website</h1><br/> You have received a new counselling request via the church website. Click here to attend to it now.
+            <a href="http://cogministries.iceteck.com/index.php/home/counsel">COUNSELLING REQUEST</a>');
+            $sent = $this->email->send(false);
+            }
         else
             $this->data['error'] = 'Error occured. Please try requesting again. Thanks';
         $this->index();
@@ -90,8 +103,16 @@ class Welcome extends CI_Controller {
                     'message' => $this->input->post('message'),
                     'dateadd' => date("Y-m-d H:i:s")
         );
-        if($this->prayermodel->saveprayer_request($request))
+        if($this->prayermodel->saveprayer_request($request)){
             $this->data['message']= 'Sent Successfully. We will get to you soon. God bless';
+        
+            //send email after saving data
+            $this->email->from("service@iceteck.com", "City Of Grace"); 
+            $this->email->subject('Prayer Request from COG website');
+            $this->email->message('<h1>User Sent a prayer request via the website</h1><br/> You have received a new prayer request via the church website. Click here to attend to it now.
+            <a href="http://cogministries.iceteck.com/index.php/home/notifications">PRAYER REQUEST</a>');
+            $sent = $this->email->send(false);
+        }
         else
             $this->data['error'] = 'Error occured. Please try requesting again. Thanks';
         $this->index();
@@ -99,8 +120,20 @@ class Welcome extends CI_Controller {
     
     //testimony
     public function testimony(){
+        $this->form_validation->set_rules(
+        'phone', 'phone number',
+        'trim|required|min_length[9]',
+        array(
+                'required' => 'You have not provided a correct %s.',
+                'min_length' => 'Phone number must be at least 9 digits long'
+            )
+        );
+        
         if(!$this->form_validation->run()){
             $this->data['current'] = 'testimony';
+            //get all confirmed testimonies
+            $this->data['testimonies'] = $this->testimony->gettestimonies_bystatus(1);
+            
     		$this->load->view('public/header', $this->data);
             $this->load->view('public/testimony', $this->data);
             $this->load->view('public/footer');
@@ -112,10 +145,17 @@ class Welcome extends CI_Controller {
                     'message' => $this->input->post('message'),
                     'dateadd' => date("Y-m-d H:i:s")
         );
-        if($this->testimony->savetestimony_request($request))
-            $this->data['message']= 'Your testimony has been received. God bless';
+        if($this->testimony->savetestimony_request($request)){
+            $this->data['message']= 'Your testimony has been received. God bless you';
+            //send email after saving data
+            $this->email->from("service@iceteck.com", "City Of Grace"); 
+            $this->email->subject('Testimony From COG website');
+            $this->email->message('<h1>User Testifies on website</h1><br/> You have received a new testimony via the church website. Click here to open
+            <a href="http://cogministries.iceteck.com/index.php/home/testimonies" target="_blank">Testimony</a>');
+            $sent = $this->email->send(false);
+        }
         else
-            $this->data['error'] = 'Error occured. Please try again. Thanks';
+            $this->data['error'] = 'Error occured. Please try again.';
         $this->index();
     }
     
@@ -133,7 +173,7 @@ class Welcome extends CI_Controller {
         'trim|required|min_length[9]',
         array(
                 'required' => 'You have not provided %s.',
-                'min_length' => 'Phone number must be atleast 9 digits long'
+                'min_length' => 'Phone number must be at least 9 digits long'
             )
         );
         if($this->form_validation->run()){
