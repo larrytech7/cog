@@ -37,6 +37,108 @@
     </div>
     </form>
   </div>
+  <!-- End sermon-->
+    <!-- create new quote message -->
+  <div id="bquote" class="modal">
+    <div class="modal-content">
+      <h4>Add an Inspirational Quote</h4>
+      <div class="row">
+        <?php echo form_open('home/quotes', array('class'=>'col s12')); ?>
+          
+          <div class="row">
+            <div class="input-field col s8 m8 l8">
+              <i class="material-icons prefix">textsms</i>
+              <textarea id="icon_prefix" cols="50" rows="6" class="materialize-textarea"  name="message" required></textarea>
+              <label for="icon_prefix">Enter Quote here (Include Bible Verse)</label>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save">Add
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
+    <!-- create new announcement message -->
+  <div id="announce" class="modal">
+    <div class="modal-content">
+      <h4>Send out a general announcement</h4>
+      <div class="row">
+        <?php echo form_open('home/announce', array('class'=>'col s12')); ?>
+          
+          <div class="row">
+            <div class="input-field col s8 m8 l8">
+              <i class="material-icons prefix">textsms</i>
+              <textarea id="icon_prefix" cols="50" rows="10" class="materialize-textarea"  name="message" required></textarea>
+              <label for="icon_prefix">Enter whole message here</label>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save">Add
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
+  
+  <!-- Reply to counselling -->
+  <div id="creply" class="modal">
+    <div class="modal-content">
+      <h4>Reply this request</h4>
+      <div class="row">
+        <?php echo form_open('home/reply_crequest', array('class'=>'col s12')); ?>
+          
+          <div class="row">
+            <div class="input-field col m12">
+              <i class="material-icons prefix">textsms</i>
+              <textarea id="icon_prefix" cols="50" rows="10" class="materialize-textarea"  name="message" required></textarea>
+              <label for="icon_prefix">Type in your reply here.</label>
+              <input type="hidden" class="cemail" value="" name="email"/>
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save"
+         onsubmit="javascript:function(){return true;}">Reply
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
+  
+  <!-- Reply to prayer requests -->
+  <div id="preply" class="modal">
+    <div class="modal-content">
+      <h4>Reply this request</h4>
+      <div class="row">
+        <?php echo form_open('home/reply_prequest', array('class'=>'col s12')); ?>
+          
+          <div class="row">
+            <div class="input-field col s8 m8 l8">
+              <i class="material-icons prefix">textsms</i>
+              <textarea id="icon_prefix" cols="50" rows="10" class="materialize-textarea"  name="message" required></textarea>
+              <label for="icon_prefix">Type in your reply here.</label>
+            </div>
+            <input type="hidden" class="pemail" value="" name="email"/>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save">Reply
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
   
 <footer class="page-footer teal">
     <div class="footer-copyright">
@@ -84,6 +186,13 @@
             window.location = $(me).attr('href');
             //alert($(me).attr('href'));   
         }
+    }
+    function setpemail(em){
+        $('input.pemail').val(em);
+    }
+    function setcemail(em){
+        $('input.cemail').val(em);
+        
     }
     function  load(){
    	    setTimeout(function(){

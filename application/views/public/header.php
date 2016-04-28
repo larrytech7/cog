@@ -9,7 +9,7 @@
     <meta name="author" content="Iceteck Inc" />
     <meta name = "format-detection" content = "telephone=no" />
     
-    <title>City Of Grace - Spreading the Good News of God</title>
+    <title>City Of Grace - Spreading the Good News of with practice</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -21,20 +21,40 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/owl.carousel.css'); ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/camera.css'); ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>"/>
-
+    <style>
+        h4{
+            font-weight: 30px;
+        }
+    </style>
 </head>
 
 <body class="page1" id="top">
     
     <header>
       <div class="container_12">
+        <div style="float:right">
+            <span><figcaption>
+                <?php
+                 if(isset($quotes) && array_key_exists(0, $quotes)){
+                    try{
+                        echo $quotes[0]['message'];
+                    }catch(Exception $e){
+///                        Logger->log_exception();
+                    }
+                 }
+                ?>
+            </figcaption>
+             </span>
+        </div>
         <div class="grid_12">
+            
           <h1 class="logo">
             <a href="<?php echo site_url(); ?>">
               LIGHT
               <span>City of Grace</span>
             </a>
           </h1>
+            
         </div>
         <div class="clear"></div>
       </div>

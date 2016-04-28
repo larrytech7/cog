@@ -1,10 +1,5 @@
 <section class="slider_wrapper">
-  <div id="camera_wrap" class="">
-    <div data-src="<?php echo base_url('assets/images/slide.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide1.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide2.jpg'); ?>"></div>  
-  </div>  
-</section> 
+</section> <br /><br /><br /><br /><br /><br />
 <!--=====================
           Content
 ======================-->
@@ -18,10 +13,10 @@ Testimonies</a>
             <table id="ttable">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Testimony</th>
-                                    <th>Media</th>
-                                    <th>Verified</th>
+                                    <th><strong>Name</strong></th>
+                                    <th><strong>Testimony</strong></th>
+                                    <th><strong>Media</strong></th>
+                                    <th><strong>Verified</strong></th>
                                 </tr>
                             </thead>
                                 <?php
@@ -31,7 +26,7 @@ Testimonies</a>
                                     echo '<tr>
                                         <td>'.$testimony['name'].'</td>
                                         <td>'.$testimony['message'].'</td>
-                                        <td>'.$testimony['media'].'<img src="'.base_url('assets/images/b_icon3.png').'" alt="" /></td>
+                                        <td>'.$testimony['media'].'<img src="'.base_url('assets/images/b_icon3.png').'" alt="media testimony" class="img img-responsive" height="80"/></td>
                                         <td>'.$icon.'</td>
                                     </tr>';
                                 ?>

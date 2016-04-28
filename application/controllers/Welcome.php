@@ -42,6 +42,7 @@ class Welcome extends CI_Controller {
 	   $this->data['current'] = 'home';
        $this->data['sermons'] = $this->homemodel->get_all('sermons');
        $this->data['events'] = $this->eventmodel->get_all('events');
+       $this->data['quotes'] = $this->homemodel->get_by_column('quotes', 'status', 1);
        
 	   if(isset($extra['message'])){
 	       $this->data['subscriptioninfo'] = $extra['message'];
@@ -76,9 +77,10 @@ class Welcome extends CI_Controller {
     //counselling
     public function counsel(){
         $request = array(
-                    'name' => $this->input->post('name'),
+                    'name' => $this->input->post('name', true),
                     'phone' => $this->input->post('phone'),
-                    'message' => $this->input->post('message'),
+                    'email' => $this->input->post('email', true),
+                    'message' => $this->input->post('message', true),
                     'dateadd' => date("Y-m-d H:i:s")
         );
         if($this->counselling->savecounsel_request($request)){
@@ -100,6 +102,7 @@ class Welcome extends CI_Controller {
         $request = array(
                     'name' => $this->input->post('name'),
                     'phone' => $this->input->post('phone'),
+                    'email' => $this->input->post('email'),
                     'message' => $this->input->post('message'),
                     'dateadd' => date("Y-m-d H:i:s")
         );
@@ -140,9 +143,10 @@ class Welcome extends CI_Controller {
             return;
         }
         $request = array(
-                    'name' => $this->input->post('name'),
-                    'phone' => $this->input->post('phone'),
-                    'message' => $this->input->post('message'),
+                    'name' => $this->input->post('name', true),
+                    'phone' => $this->input->post('phone', true),
+                    'email' => $this->input->post('email', true),
+                    'message' => $this->input->post('message', true),
                     'dateadd' => date("Y-m-d H:i:s")
         );
         if($this->testimony->savetestimony_request($request)){
@@ -152,7 +156,11 @@ class Welcome extends CI_Controller {
             $this->email->subject('Testimony From COG website');
             $this->email->message('<h1>User Testifies on website</h1><br/> You have received a new testimony via the church website. Click here to open
             <a href="http://cogministries.iceteck.com/index.php/home/testimonies" target="_blank">Testimony</a>');
-            $sent = $this->email->send(false);
+            try{
+                $sent = $this->email->send(false);
+            }catch(Exception $ex){
+                $this->data['error'] = 'Internet Connection Unavailable. '. $ex->getMessage();
+            }
         }
         else
             $this->data['error'] = 'Error occured. Please try again.';

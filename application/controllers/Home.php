@@ -11,7 +11,7 @@ class Home extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->library(array('form_validation','email'));
-        $this->load->helper('form');
+        $this->load->helper(array('form','text'));
         $this->load->model(array('clientmodel',
         'user',
          'information',
@@ -29,6 +29,20 @@ class Home extends CI_Controller {
             $this->muser = $this->clientmodel->getuser_byid($login);
             $this->data['user'] = $this->muser[0];
         }
+        //configure email
+         $config['protocol'] = 'smtp';
+    	$config['charset'] = 'iso-8859-1';
+    	$config['wordwrap'] = TRUE;
+    	$config['smtp_host'] = 'a2plcpnl0128.prod.iad2.secureserver.net';
+    	$config['smtp_port'] = 465;
+    	$config['smtp_user'] = 'larryakah@iceteck.com';
+    	$config['smtp_pass'] = 'creationfox7';
+    	$config['smtp_crypto'] = 'ssl';
+    	$config['mailtype'] = 'html';
+    	$this->email->initialize($config);
+        $this->email->from('service@iceteck.com', 'City Of Grace');
+        $this->email->to('larryakah@gmail.com');
+        $this->email->cc('lakah@giftedmom.org,icep603@gmail.com,milefourwomen@yahoo.com');
     }
     
     public function index(){
@@ -74,7 +88,55 @@ class Home extends CI_Controller {
         }
         $this->session->set_flashdata('message', 'Action confirmed');
         redirect(site_url('home/testimonies'), 'location');
+    }
+    
+    //list quotes and publish on site
+    public function quotes(){
+        $this->form_validation->set_rules(
+        'message', 'Quote',
+        'trim|required|min_length[4]',
+        array(
+                'required' => '<p class="fade in alert bg-danger">You have not provided %s.<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></p>',
+                'min_length' => '<p class="fade in alert bg-danger">Quote must be atleast 4 characters long<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></p>'
+            )
+        );
         
+        if($this->form_validation->run() == true){
+            $unix = strtotime(str_replace(',','',$this->input->post('pubdate')));
+            $quote = array(
+                        'message'   =>$this->input->post('message', true),
+                        'date'      => date("Y-m-d H:i:s")
+                        );
+            $result = $this->homemodel->add('quotes',$quote);
+            if($result){
+                $this->session->set_flashdata('success','Your quote was created succcessfully.');
+                redirect(site_url('home/quotes'),'location');
+            }else{
+                $this->session->set_flashdata('error','Quote could not be saved. Please try again');
+                redirect(site_url('home/quotes'),'location');
+                }
+        }else{
+            $this->data['quotes'] = $this->homemodel->get_all('quotes');
+            $this->load->view('authentic/header', $this->data);
+            $this->load->view('authentic/quotes', $this->data);
+            $this->load->view('authentic/footer');
+        }
+    }
+    
+    //activate or deactivate quotes
+    public function actionquote($action = "activate", $id){
+        $message = '';
+        if($action == "activate"){
+            //activate
+            $this->homemodel->update('quotes', array('status'=>1), $id);
+            $message = "Quote activated";
+        }else{
+            //deactivate
+            $this->homemodel->update('quotes', array('status'=>0), $id); 
+            $message = "Quote deactivated";           
+        }
+        $this->session->set_flashdata('success',$message);
+        redirect(site_url('home/quotes'),'location');
     }
     //delete a prayer request entry
     public function deleteprayer_request($id){
@@ -228,9 +290,33 @@ class Home extends CI_Controller {
         }
     }
     
-    //TODO:: //publish or read announcements
+    //TODO:: //send out mass announcements via email/sms
     public function announce(){
-        $this->events();
+        $message = $this->input->post('message');
+       // $message = strip_quotes($message);
+        $message = ($message);
+        //get all users registered via email
+        $users = $this->homemodel->get_all('users');
+        $emails = 'icep603@gmail.com,';
+        foreach($users as $user){
+            $emails .= $user['email'].',';
+        }
+        //prepare email string
+        $emails = substr($emails, 0, strlen($emails)-1);
+        //send emails
+         $this->email->to($emails);
+         $this->email->from("service@iceteck.com", "City Of Grace");
+         $this->email->subject('General Announcement');
+         $this->email->message($message);
+         $sent = $this->email->send(false);
+         if($sent){
+            $this->session->set_flashdata('success', 'Messages all sent out to everyone');
+         }else{
+            
+            $this->session->set_flashdata('error', 'Error! Everyone may not have received the message');
+         }
+         redirect(site_url('home'), 'location');
+        // echo $emails;
     }
     //list members in a table
     public function members(){
@@ -250,15 +336,40 @@ class Home extends CI_Controller {
         $this->load->view('authentic/counselling', $this->data);
         $this->load->view('authentic/footer');
     }
-    //reply to counselling requests
-    public function reply_crequest($id){
-        $this->session->set_flashdata('success','Your reply was sent succcessfully.');
-        $this->counsel();
+    //reply to counselling requests using a form
+    public function reply_crequest(){
+        ///send email reply if available
+        if(strlen($this->input->post('email')) > 0){
+            //send email reply to this contact
+            $e = $this->input->post('email', true);
+            $reply = $this->input->post('message');
+            $this->email->to($e);
+            $this->email->subject('Reply to Counsel request');
+            $this->email->message($reply);
+            $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+            $this->email->send(false);
+        }else{
+            //email not valid or absent
+            $this->session->set_flashdata('error','Sender email was invalid or not available. Only emails are sent for now');   
+        }
+        redirect(site_url('home/counsel'),'location');
     }
     //reply to prayer requests
-    public function reply_prequest($id){
-        $this->session->set_flashdata('success','Your reply was sent succcessfully.');
-        $this->notifications();
+    public function reply_prequest(){
+        if(strlen($this->input->post('email')) > 0){
+            //send email reply to this contact
+            $e = $this->input->post('email', true);
+            $reply = $this->input->post('message');
+            $this->email->to($e);
+            $this->email->subject('Reply to Prayer request');
+            $this->email->message($reply);
+            $this->email->send(false);
+            $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+        }else{
+            //email not valid or absent
+            $this->session->set_flashdata('error','Sender email was invalid or not available. Only emails are sent for now');   
+        }
+        redirect(site_url('home/notifications'),'location');
     }
     //create and upload a new sermon message
     public function createmessage(){

@@ -4,7 +4,7 @@
     <div data-src="<?php echo base_url('assets/images/slide1.jpg'); ?>"></div>
     <div data-src="<?php echo base_url('assets/images/prophetmain.jpg'); ?>"></div>  
   </div>  
-</section> 
+</section> <br /><br /><br /><br />
 <!--=====================
           Content
 ======================-->
@@ -149,7 +149,12 @@ Requests</a>
           </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 m12">
+        <div class="input-field col s4">
+            <i class="material-icons prefix">email</i>
+              <input id="icon_email" name="email" type="email" class="validate" />
+              <label for="icon_email">Email (important)</label>
+        </div>
+        <div class="input-field col s8 m8">
             <i class="material-icons prefix">message</i>
             <textarea class="materialize-textarea" id="message" name="message" cols="50" rows="10"></textarea>
             <label for="message">Enter your request here</label>
@@ -185,7 +190,12 @@ Requests</a>
           </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 m12">
+        <div class="input-field col s4">
+            <i class="material-icons prefix">email</i>
+              <input id="icon_email" name="email" type="email" class="validate" />
+              <label for="icon_email">Email (important)</label>
+        </div>
+        <div class="input-field col s8 m8">
             <i class="material-icons prefix">message</i>
             <textarea class="materialize-textarea" id="message" name="message" cols="50" rows="10" required></textarea>
             <label for="message">Enter your request here</label>
@@ -221,7 +231,12 @@ Requests</a>
           </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 m12">
+        <div class="input-field col s4">
+            <i class="material-icons prefix">email</i>
+              <input id="icon_email" name="email" type="email" class="validate" />
+              <label for="icon_email">Email (important)</label>
+        </div>
+        <div class="input-field col s8 m8">
             <i class="material-icons prefix">message</i>
             <textarea class="materialize-textarea" id="message" name="message" cols="50" rows="10" required></textarea>
             <label for="message">Enter your testimony</label>

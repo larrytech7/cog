@@ -17,7 +17,7 @@ class User extends CI_Model{
     }
     public function list_users(){
         return $this->db
-                ->order_by('dateadd', 'ASC')
+                ->order_by('date', 'ASC')
                 ->get($this->usertable)->result_array();
     }   
     public function delete_user($id){

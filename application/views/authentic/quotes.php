@@ -26,28 +26,29 @@
               </ul>
         </div>
         <div class="col s8 m8 l8">
-                <h3><i class="material-icons prefix">announcement</i> Registered Members. </h3>
+                <h3><i class="material-icons prefix">announcement</i> Quotes. <a href="#bquote" class="modal-trigger"><i class="material-icons">library_add</i>Add Quote</a></h3>
                 <div class="card-panel teal darken-3 responsive">
-                    <div class="row ">
-                        <table id="usertable">
+                    <div class="row">
+                        <table id="ttable">
                             <thead>
                                 <tr>
-                                    <th>Phone</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Country</th>
-                                    <th>Registered</th>
+                                    <th>Quotes</th>
+                                    <th>Added On</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                                 <?php
-                                if(isset($users)):
-                                 foreach($users as $user):
+                                if(isset($quotes)):
+                                 foreach($quotes as $quote):
+                                    $icon = $quote['status'] == 0?'<span><i class="material-icons red-text">error</i></span>':'<span><i class="material-icons blue-text">verified_user</i></span>';
                                     echo '<tr>
-                                        <td>'.$user['phone'].'</td>
-                                        <td>'.$user['name'].'</td>
-                                        <td>'.$user['email'].'</td>
-                                        <td>'.$user['country'].'</td>
-                                        <td>'.$user['date'].'</td>
+                                        <td>'.word_limiter($quote['message'], 30).'</td>
+                                        <td>'.$quote['date'].'</td>
+                                        <td>'.$icon.'</td>
+                                        <td><a href="'.site_url('home/actionquote/activate/'.$quote['ID']).'" title="Activate this quote"><i class="material-icons blue-text">done_all</i></a>
+                                        <a href="'.site_url('home/actionquote/remove/'.$quote['ID']).'" title="Deactivate Quote"><i class="material-icons red-text">delete_forever</i></a>
+                                        </td>
                                     </tr>';
                                 ?>
                                 <?php

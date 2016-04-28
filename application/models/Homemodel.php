@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Homemodel extends CI_Model{
         
-    private $testimony_table = 'testimonies';
     
     public function __construct(){
         parent::__construct();
@@ -42,7 +41,12 @@ class Homemodel extends CI_Model{
     public function get_by_id($table, $id){
         return $this->db
                 ->where('id', $id)
-                ->order_by('date', 'DESC')
+                ->get($table)
+                ->result_array();
+    }
+    public function get_by_column($table, $colname, $colvalue){
+         return $this->db
+                ->where($colname, $colvalue)
                 ->get($table)
                 ->result_array();
     }

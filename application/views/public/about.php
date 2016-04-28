@@ -1,10 +1,5 @@
 <section class="slider_wrapper">
-  <div id="camera_wrap" class="">
-    <div data-src="<?php echo base_url('assets/images/slide.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide1.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide2.jpg'); ?>"></div>  
-  </div>  
-</section> 
+</section> <br /><br /><br />
 <!--=====================
           Content
 ======================-->
