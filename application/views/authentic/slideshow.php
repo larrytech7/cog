@@ -23,36 +23,29 @@
                 <li class="collection-item"><div>Counselling<a href="<?php echo site_url('home/counsel'); ?>" class="secondary-content"><i class="material-icons">wc</i></a></div></li>
                 <li class="collection-item"><div>Users<a href="<?php echo site_url('home/members'); ?>" class="secondary-content"><i class="material-icons">supervisor_account</i></a></div></li>
                 <li class="collection-item"><div>Testimonies<a href="<?php echo site_url('home/testimonies'); ?>" class="secondary-content"><i class="material-icons">record_voice_over</i></a></div></li>
-                <li class="collection-item"><div>Slideshow Images<a href="<?php echo site_url('home/banner'); ?>" class="secondary-content"><i class="material-icons">perm_media</i></a></div></li>
+                <li class="collection-item"><div>Slideshow Images<a href="<?php echo site_url('home/banner'); ?>" class="secondary-content "><i class="material-icons">perm_media</i></a></div></li>
               </ul>
         </div>
         <div class="col s8 m8 l8">
-                <h3><i class="material-icons prefix">announcement</i> Testimonies. </h3>
+                <h3><i class="material-icons prefix">announcement</i> Banner Slideshows. <a href="#banner" class="modal-trigger"><i class="material-icons">queue</i></a></h3>
                 <div class="card-panel teal darken-3 responsive">
                     <div class="row ">
                         <table id="ttable">
                             <thead>
                                 <tr>
-                                    <th>Phone</th>
                                     <th>Name</th>
-                                    <th>Message</th>
-                                    <th>status</th>
-                                    <th>Registered</th>
+                                    <th>Added on</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                                 <?php
-                                if(isset($testimonies)):
-                                 foreach($testimonies as $testimony):
-                                    $icon = $testimony['status'] == 0?'<span><i class="material-icons red-text">error</i></span>':'<span><i class="material-icons blue-text">verified_user</i></span>';
+                                if(isset($banners)):
+                                 foreach($banners as $banner):
                                     echo '<tr>
-                                        <td>'.$testimony['phone'].'</td>
-                                        <td>'.$testimony['name'].'</td>
-                                        <td>'.word_wrap($testimony['message']).'</td>
-                                        <td>'.$icon.'</td>
-                                        <td>'.$testimony['dateadd'].'</td>
-                                        <td><a href="'.site_url('home/actiontestimony/confirm/'.$testimony['id']).'" title="confirm and publish testimony"><i class="material-icons blue-text">done_all</i></a>
-                                        <a href="'.site_url('home/actiontestimony/refute/'.$testimony['id']).'" title="Refuse and delete testimony"><i class="material-icons red-text">delete_forever</i></a>
+                                        <td>'.$banner['name'].'</td>
+                                        <td>'.$banner['date'].'</td>
+                                        <td>
+                                        <a href="'.site_url('home/bannerremove/'.$banner['id']).'" title="Delete "><i class="material-icons red-text">delete_forever</i></a>
                                         </td>
                                     </tr>';
                                 ?>

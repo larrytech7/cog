@@ -25,6 +25,9 @@
         h4{
             font-weight: 30px;
         }
+        ul.sf-menu a{
+            font-size: 30px;
+        }
     </style>
 </head>
 

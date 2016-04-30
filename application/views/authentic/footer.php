@@ -62,6 +62,29 @@
     </form>
   </div>
   </div>
+  <!-- add a new banner image for slideshow -->
+  <div id="banner" class="modal">
+    <div class="modal-content">
+      <h4>Add a new Slide Image</h4>
+      <div class="row">
+        <?php echo form_open('home/banner', array('class'=>'col s12', 'enctype'=>'multipart/form-data')); ?>
+          
+          <div class="row">
+            <div class="input-field col s8 m8 l8">
+              <i class="material-icons prefix">offline_pin</i>
+              <input type="file" id="icon_prefix" class=""  name="userfile" required />
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save">Add
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
     <!-- create new announcement message -->
   <div id="announce" class="modal">
     <div class="modal-content">

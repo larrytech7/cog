@@ -18,7 +18,7 @@
     <div class="clear"></div>
   </div>
   <article class="block-1 contacts ">
-    <div class="container_12">
+    <div class="container_12 white">
       <div class="grid_12">
         <h3 class="black ta__center">Contact Form</h3>
       </div>

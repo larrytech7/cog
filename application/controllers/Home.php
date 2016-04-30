@@ -53,6 +53,46 @@ class Home extends CI_Controller {
         $this->load->view('authentic/main',$this->data);
         $this->load->view('authentic/footer');
     }
+    //manage(add/list) banners
+    public function banner(){
+        $banners = $this->homemodel->get_all('banners');
+        $this->data['banners'] = $banners;
+        if($this->input->post('userfile') != null){
+            //upload pic for banner and save
+            $banner  = array('name'=>'',
+                            'url'=>'',
+                            'date'=>'');
+                            
+            $config['upload_path'] = './assets/img/';
+    		$config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG';
+    
+    		$this->load->library('upload', $config);
+    
+    		if ( ! $this->upload->do_upload())
+    		{
+    			$error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('error', 'Failed to upload image. Try again. '.$error['error']);
+    		}
+    		else
+    		{
+    			$data = array('upload_data' => $this->upload->data());
+                $banner['name'] = $data['file_name'];
+	           $banner['url'] = $data['full_path'];
+               $banner['date'] = date("Y-m-d H:i:s");
+            }
+            
+            $this->homemodel->add('banner', $banner);
+        }
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/slideshow',$this->data);
+        $this->load->view('authentic/footer');
+    }
+    //remove banners
+    public function bannerremove($id){
+        $this->homemodel->delete('banners', $id);
+        $this->session->set_flashdata('success', 'Banner image removed successfully');
+        redirect(site_url('home/banner'),'location');
+    }
     //view a particular sermon
     public function announcement($id){
        // $this->data['user'] = $this->muser[0];
