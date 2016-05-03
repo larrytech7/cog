@@ -43,6 +43,8 @@ class Welcome extends CI_Controller {
        $this->data['sermons'] = $this->homemodel->get_all('sermons');
        $this->data['events'] = $this->eventmodel->get_all('events');
        $this->data['quotes'] = $this->homemodel->get_by_column('quotes', 'status', 1);
+       $banners = $this->homemodel->get_all('banners');
+       $this->data['banners'] = $banners;
        
 	   if(isset($extra['message'])){
 	       $this->data['subscriptioninfo'] = $extra['message'];

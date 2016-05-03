@@ -8,7 +8,7 @@
           <div class="row">
             <div class="input-field col s8 m8 l8">
                 <i class="material-icons prefix">info</i>
-                <input type="text" name="title" id="title" required/>
+                <input type="text" name="title" id="title" required />
                 <label for="title">Sermon title</label>
             </div>
           </div>
@@ -67,8 +67,8 @@
     <div class="modal-content">
       <h4>Add a new Slide Image</h4>
       <div class="row">
-        <?php echo form_open('home/banner', array('class'=>'col s12', 'enctype'=>'multipart/form-data')); ?>
-          
+        <?php echo form_open_multipart('home/addbanner', array('class'=>'col s12')); ?>
+        
           <div class="row">
             <div class="input-field col s8 m8 l8">
               <i class="material-icons prefix">offline_pin</i>
@@ -77,7 +77,7 @@
           </div>
     </div>
     <div class="modal-footer">
-        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="save">Add
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="bannersave">Add
             <i class="material-icons right">send</i>
         </button>
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>

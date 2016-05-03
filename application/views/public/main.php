@@ -1,8 +1,14 @@
 <section class="slider_wrapper">
   <div id="camera_wrap" class="">
-    <div data-src="<?php echo base_url('assets/images/slide.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/slide1.jpg'); ?>"></div>
-    <div data-src="<?php echo base_url('assets/images/prophetmain.jpg'); ?>"></div>  
+    <?php
+        if(isset($banners)):
+            foreach($banners as $banner):
+                echo '<div data-src="'.base_url('assets/img/'.$banner['name']).'"></div>';
+    ?>
+    <?php
+        endforeach;
+        endif;
+    ?>  
   </div>  
 </section> <br /><br /><br /><br />
 <!--=====================
@@ -554,4 +560,4 @@ Requests</a>
     </div>
     </form>
   </div>  
-<!-- End Podcasts section -->
+<!-- End signup section -->

@@ -55,10 +55,17 @@ class Home extends CI_Controller {
     }
     //manage(add/list) banners
     public function banner(){
+        //get all banners and display results
         $banners = $this->homemodel->get_all('banners');
         $this->data['banners'] = $banners;
-        if($this->input->post('userfile') != null){
-            //upload pic for banner and save
+                
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/slideshow',$this->data);
+        $this->load->view('authentic/footer');
+    }
+    //upload banner images
+    public function addbanner(){
+         //upload pic for banner and save
             $banner  = array('name'=>'',
                             'url'=>'',
                             'date'=>'');
@@ -76,16 +83,14 @@ class Home extends CI_Controller {
     		else
     		{
     			$data = array('upload_data' => $this->upload->data());
-                $banner['name'] = $data['file_name'];
-	           $banner['url'] = $data['full_path'];
+                $banner['name'] = $data['upload_data']['file_name'];
+	           $banner['url'] = $data['upload_data']['full_path'];
                $banner['date'] = date("Y-m-d H:i:s");
+               $this->session->set_flashdata('success','Banner uplaoded successfully');
             }
             
-            $this->homemodel->add('banner', $banner);
-        }
-        $this->load->view('authentic/header', $this->data);
-        $this->load->view('authentic/slideshow',$this->data);
-        $this->load->view('authentic/footer');
+            $this->homemodel->add('banners', $banner);
+            $this->banner();
     }
     //remove banners
     public function bannerremove($id){
