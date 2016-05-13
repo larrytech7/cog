@@ -7,7 +7,7 @@
     <motion value="Cubic"/>
     <ease value="easeOut"/>
     <useButton value="false"/>
-    <arrow value="../images/redarrow.png"/>
+    <arrow value="images/redarrow.png"/>
     <margin value="0"/>
     <path value="DockMenuFX"/>
     <showAbout value="true"/>
