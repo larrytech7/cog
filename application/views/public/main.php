@@ -42,7 +42,7 @@ Requests</a>
   <div class="container_12">
     <div class="grid_6" style="max-height: 430px; overflow-y:auto">
         <p>Recent sermons</p>
-        <a href="#!" class="btn btn-primary">Receive Jesus Today</a>
+        <a href="#!" class="btn btn-primary">Receive Jesus Today</a> 
         
           <?php 
             foreach($sermons as $sermon):
@@ -108,6 +108,10 @@ Requests</a>
     </div>
     <div class="clear"></div>
   </div>
+  <div class="container_10">
+    <div class="center-align"><h3><a href="#gallery" class="modal-trigger">Glory Gallery </a></h3></div>
+  </div>
+  <div class="clear"></div>
   <div class="clear sep-1"></div>
   <article class="carousel_wrapper" id="events">
     <div class="container_12">

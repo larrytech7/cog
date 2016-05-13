@@ -27,7 +27,15 @@
     </form>
   </div>
   <!-- End login modal -->
-  
+  <!-- Gallery modal -->
+  <div id="gallery" class="modal">
+    <div class="modal-content">
+        <h4>Photo Gallery</h4>
+        <div class="row">
+            <div id="DivDockGalleryFX"></div>
+        </div>
+    </div>
+  </div>
 <footer id="footer">
   <div class="container_12">
     <div class="grid_12"> 
@@ -157,6 +165,18 @@
                 }
             });
         });
+    </script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/swfobject.js'); ?>"></script>
+    <script type="text/javascript">
+     var flashvars = {};
+     var params = {};
+     params.base = "";
+     params.scale = "noscale";
+     params.salign = "tl";
+     params.wmode = "transparent";
+     params.allowFullScreen = "true";
+     params.allowScriptAccess = "always";
+     swfobject.embedSWF("<?php echo base_url('assets/js/DockGalleryFX.swf'); ?>", "DivDockGalleryFX", "600", "400", "9.0.0", false, flashvars, params);
     </script>
   </body>
 </html>
