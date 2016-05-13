@@ -175,7 +175,7 @@
      params.salign = "tl";
      params.wmode = "transparent";
      params.allowFullScreen = "true";
-     params.allowScriptAccess = "always";]?
+     params.allowScriptAccess = "always";
      
      swfobject.embedSWF("<?php echo base_url('assets/js/DockGalleryFX.swf'); ?>", "DivDockGalleryFX", "600", "400", "9.0.0", false, flashvars, params);
     </script>
