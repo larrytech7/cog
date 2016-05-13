@@ -170,12 +170,13 @@
     <script type="text/javascript">
      var flashvars = {};
      var params = {};
-     params.base = "";
+     params.base = "assets";
      params.scale = "noscale";
      params.salign = "tl";
      params.wmode = "transparent";
      params.allowFullScreen = "true";
-     params.allowScriptAccess = "always";
+     params.allowScriptAccess = "always";]?
+     
      swfobject.embedSWF("<?php echo base_url('assets/js/DockGalleryFX.swf'); ?>", "DivDockGalleryFX", "600", "400", "9.0.0", false, flashvars, params);
     </script>
   </body>
