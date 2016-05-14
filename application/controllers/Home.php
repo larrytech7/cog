@@ -86,7 +86,7 @@ class Home extends CI_Controller {
                 $banner['name'] = $data['upload_data']['file_name'];
 	           $banner['url'] = $data['upload_data']['full_path'];
                $banner['date'] = date("Y-m-d H:i:s");
-               $this->session->set_flashdata('success','Banner uplaoded successfully');
+               $this->session->set_flashdata('success','Banner uploaded successfully');
             }
             
             $this->homemodel->add('banners', $banner);
@@ -98,6 +98,73 @@ class Home extends CI_Controller {
         $this->session->set_flashdata('success', 'Banner image removed successfully');
         redirect(site_url('home/banner'),'location');
     }
+    //manage(add/list) gallery
+    public function gallery(){
+        //get all banners and display results
+        $gallery = $this->homemodel->get_all('gallery');
+        $this->data['galleries'] = $gallery;
+                
+        $this->load->view('authentic/header', $this->data);
+        $this->load->view('authentic/gallery',$this->data);
+        $this->load->view('authentic/footer');
+    }
+    
+    //upload gallery image
+    public function addgallery(){
+         //upload pic for gallery and save
+            $gimage  = array('title'=>'',
+                            'caption'=>'',
+                            'date'=>'');
+                            
+            $config['upload_path'] = './assets/gallery/';
+    		$config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG';
+    
+    		$this->load->library('upload', $config);
+    
+    		if ( ! $this->upload->do_upload())
+    		{
+    			$error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('error', 'Failed to upload image. Try again. '.$error['error']);
+    		}
+    		else
+    		{
+    			$data = array('upload_data' => $this->upload->data());
+                $fname = $data['upload_data']['file_name']; //with extension
+                
+                $gimage['title'] = $this->input->post('title');
+                $gimage['caption'] = $this->input->post('caption');//['upload_data']['full_path'];
+                $gimage['name'] = $data['upload_data']['file_name'];
+                $gimage['date'] = date("Y-m-d H:i:s");
+                
+                $status = $this->homemodel->add('gallery', $gimage);
+                if($status){
+                    $gimages = $this->homemodel->get_all('gallery');
+                    //set data in image gallery widget config xml file
+                    $bigf = fopen('assets/big.xml', 'w+'); //write main images here
+                    $smallf = fopen('assets/thumbs.xml', 'w+'); //write thumbs here
+                    //create open config header
+                    fwrite($bigf, '<images>');
+                    fwrite($smallf, '<gallery>');
+                    //loop through results and populate the gallery
+                    foreach($gimages as $gimage){
+                        fwrite($smallf, '<photo image="gallery/thumbs/'.$gimage['name'].'"><![CDATA[Download it for FREE]]></photo>');
+                        fwrite($bigf, '<photo image="gallery/'.$gimage['name'].'"><![CDATA[<head>'.$gimage['title'].'</head><body>'.$gimage['caption'].'</body>]]></photo>');
+                    }
+                    //write end tags
+                    fwrite($bigf, '</images>');
+                    fwrite($smallf, '</gallery>');
+                    //close resources
+                    fclose($bigf);
+                    fclose($smallf);
+                }
+               $this->session->set_flashdata('success','Gallery image uploaded successfully');
+            }
+            
+            
+            $this->gallery();
+    }
+    //TODO function for remove a gallery item.
+    
     //view a particular sermon
     public function announcement($id){
        // $this->data['user'] = $this->muser[0];

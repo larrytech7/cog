@@ -85,6 +85,41 @@
     </form>
   </div>
   </div>
+  <!-- add a new gallery image for gallery section -->
+  <div id="mygallery" class="modal">
+    <div class="modal-content">
+      <h4>Add a new Gallery Image</h4>
+      <div class="row">
+        <?php echo form_open_multipart('home/addgallery', array('class'=>'col s12')); ?>
+        
+            <div class="row">
+                <div class="input-field s8 m8">
+                    <i class="material-icons prefix">info</i>
+                    <input type="text" class="" id="icon_prefix" name="title" required max="255" placeholder="Enter a title"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field s8 m8">
+                    <i class="material-icons prefix">info</i>
+                    <textarea id="icon_prefix" name="caption" class="materialize-textarea" required max="400" placeholder="Enter a caption for your image"></textarea>
+                </div>
+            </div>
+          <div class="row">
+            <div class="input-field col s8 m8 l8">
+              <i class="material-icons prefix">offline_pin</i>
+              <input type="file" id="icon_prefix" class=""  name="userfile" required />
+            </div>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn waves-effect waves-light teal btn-flat" type="submit" name="bannersave">Add
+            <i class="material-icons right">send</i>
+        </button>
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+    </form>
+  </div>
+  </div>
     <!-- create new announcement message -->
   <div id="announce" class="modal">
     <div class="modal-content">
