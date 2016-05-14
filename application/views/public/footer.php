@@ -31,8 +31,7 @@
   <div id="gallery" class="modal">
     <div class="modal-content">
         <h4>Photo Gallery</h4>
-        <div class="row">
-            <div id="DivDockGalleryFX"></div>
+        <div class="row" id="DivDockGalleryFX">
         </div>
     </div>
   </div>
