@@ -30,7 +30,7 @@ class Home extends CI_Controller {
             $this->data['user'] = $this->muser[0];
         }
         //configure email
-         $config['protocol'] = 'smtp';
+        $config['protocol'] = 'smtp';
     	$config['charset'] = 'iso-8859-1';
     	$config['wordwrap'] = TRUE;
     	$config['smtp_host'] = 'a2plcpnl0128.prod.iad2.secureserver.net';
@@ -41,8 +41,8 @@ class Home extends CI_Controller {
     	$config['mailtype'] = 'html';
     	$this->email->initialize($config);
         $this->email->from('service@iceteck.com', 'City Of Grace');
-        $this->email->to('larryakah@gmail.com');
-        $this->email->cc('lakah@giftedmom.org,icep603@gmail.com,milefourwomen@yahoo.com');
+        //$this->email->to('larryakah@gmail.com');
+        $this->email->cc('icep603@gmail.com,milefourwomen@yahoo.com');
     }
     
     public function index(){
@@ -459,7 +459,7 @@ class Home extends CI_Controller {
             $this->email->subject('Reply to Counsel request');
             $this->email->message($reply);
             $this->session->set_flashdata('success','Your reply was sent succcessfully.');
-            $this->email->send(false);
+            $this->email->send();
         }else{
             //email not valid or absent
             $this->session->set_flashdata('error','Sender email was invalid or not available. Only emails are sent for now');   
