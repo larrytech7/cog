@@ -42,7 +42,7 @@ class Home extends CI_Controller {
     	$this->email->initialize($config);
         $this->email->from('service@iceteck.com', 'City Of Grace');
         //$this->email->to('larryakah@gmail.com');
-        $this->email->cc('icep603@gmail.com,milefourwomen@yahoo.com');
+        $this->email->cc('icep603@gmail.com');//,milefourwomen@yahoo.com');
     }
     
     public function index(){
@@ -458,8 +458,12 @@ class Home extends CI_Controller {
             $this->email->to($e);
             $this->email->subject('Reply to Counsel request');
             $this->email->message($reply);
-            $this->session->set_flashdata('success','Your reply was sent succcessfully.');
-            $this->email->send();
+            $r = $this->email->send();
+            if($r){
+                $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+            }else{
+                $this->session->set_flashdata('error','Reply not sent.Please try again');
+            }
         }else{
             //email not valid or absent
             $this->session->set_flashdata('error','Sender email was invalid or not available. Only emails are sent for now');   
@@ -475,8 +479,12 @@ class Home extends CI_Controller {
             $this->email->to($e);
             $this->email->subject('Reply to Prayer request');
             $this->email->message($reply);
-            $this->email->send(false);
-            $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+            $r = $this->email->send();
+            if($r){
+                $this->session->set_flashdata('success','Your reply was sent succcessfully.');
+            }else{
+                $this->session->set_flashdata('error','Reply not sent.Please try again');
+            }
         }else{
             //email not valid or absent
             $this->session->set_flashdata('error','Sender email was invalid or not available. Only emails are sent for now');   
