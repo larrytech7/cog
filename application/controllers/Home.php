@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Sending emails fromt his class is yet not possible until the recent version if pulled from the server
+ */
 class Home extends CI_Controller {
 
     private $muser = array();
